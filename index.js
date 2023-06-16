@@ -2,7 +2,6 @@ const editButtonElement = document.querySelector('.profile__edit-button');
 const popupElement = document.querySelector('.popup');
 const formElement = document.querySelector('.popup__form');
 const closeButtonElement = document.querySelector('.popup__close-button');
-const likeElement = document.querySelectorAll('.cards__like');
 
 const titleElement = document.querySelector('.profile__title');
 const subtitleElement = document.querySelector('.profile__subtitle');
