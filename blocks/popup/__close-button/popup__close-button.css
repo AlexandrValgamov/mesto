@@ -9,8 +9,19 @@
   background-color: transparent;
   border: 0;
   cursor: pointer;
+  padding: 0;
 }
 
 .popup__close-button:hover {
   opacity: .6;
+}
+
+@media screen and (max-width: 740px) {
+  .popup__close-button {
+
+    width: 20px;
+    height: 20px;
+    right: 0;
+    top: -36px;
+  }
 }

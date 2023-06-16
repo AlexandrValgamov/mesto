@@ -3,3 +3,15 @@
   margin: 0 auto;
   padding: 67px 0 60px;
 }
+
+@media screen and (max-width: 880px) {
+  .footer {
+    max-width: 594px;
+  }
+}
+
+@media screen and (max-width: 740px) {
+  .footer {
+    padding: 52px 19px 36px;
+  }
+}

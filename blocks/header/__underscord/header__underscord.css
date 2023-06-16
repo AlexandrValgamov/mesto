@@ -4,3 +4,9 @@
   padding-top: 41px;
   opacity: .7;
 }
+
+@media screen and (max-width: 740px) {
+  .header__underscord {
+    padding-top: 32.6px;
+  }
+}

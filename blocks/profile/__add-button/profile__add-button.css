@@ -4,6 +4,7 @@
   width: 150px;
   height: 50px;
   background-size: contain;
+  background-repeat: no-repeat;
   border: 0;
   cursor: pointer;
   grid-area: add-button;
@@ -14,4 +15,13 @@
 
 .profile__add-button:hover {
   opacity: .6;
+}
+
+@media screen and (max-width: 740px) {
+  .profile__add-button {
+    background-image: url(../../../images/add-button-mobile.svg);
+    width: 282px;
+    margin: 0;
+    align-self: end;
+  }
 }

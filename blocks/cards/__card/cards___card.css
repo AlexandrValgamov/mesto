@@ -4,4 +4,5 @@
   width: 282px;
   max-height: 361px;
   overflow: hidden;
+  line-height: 0;
 }

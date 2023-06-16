@@ -5,3 +5,17 @@
   grid-template-columns: repeat(auto-fit, minmax(282px, 1fr));
   gap: 17px;
 }
+
+@media screen and (max-width: 880px) {
+  .cards {
+    max-width: 581px;
+    justify-items: center;
+  }
+}
+
+@media screen and (max-width: 740px) {
+  .cards {
+    max-width: 282px;
+    gap: 20px;
+  }
+}

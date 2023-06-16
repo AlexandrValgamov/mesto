@@ -10,6 +10,13 @@
   width: 358px;
   border: none;
   border-bottom: 1px solid #00000033;
-  margin: 0 36px 30px;
-  padding-bottom: 13px;
+  margin: 0 auto 30px;
+  padding-bottom: 9px;
+}
+
+@media screen and (max-width: 740px) {
+  .popup__input {
+    width: 238px;
+    padding: 0;
+  }
 }
