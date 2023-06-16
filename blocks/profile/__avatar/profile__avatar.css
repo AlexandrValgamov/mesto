@@ -1,0 +1,8 @@
+.profile__avatar {
+  background-image: url(../../../images/kusto.png);
+  height: 120px;
+  width: 120px;
+  background-size: cover;
+  border-radius: 50%;
+  grid-area: avatar;
+}

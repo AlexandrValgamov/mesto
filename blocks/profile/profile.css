@@ -1,0 +1,12 @@
+.profile {
+  width: 100%;
+  max-width: 880px;
+  display: grid;
+  grid-template-columns: 120px fit-content(528px) 1fr fit-content(282px);
+  grid-template-rows: 61px 59px;
+  grid-template-areas:
+  "avatar title edit-button add-button"
+  "avatar subtitle subtitle add-button";
+  margin: 0 auto;
+  padding-bottom: 51px;
+}
