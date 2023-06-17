@@ -11,7 +11,6 @@
 
     <header class="header">
       <div class="header__logo"></div>
-      <div class="header__underscord"></div>
     </header>
 
     <main class="content">
@@ -19,74 +18,75 @@
       <section class="profile">
         <div class="profile__avatar"></div>
         <h1 class="profile__title">Жак-Ив Кусто</h1>
-        <button class="profile__edit-button"></button>
+        <button class="profile__edit-button" type="button"></button>
         <p class="profile__subtitle">Исследователь океана</p>
-        <button class="profile__add-button"></button>
+        <button class="profile__add-button" type="button"></button>
       </section>
 
       <section class="cards" aria-label="Галерея">
-        <div class="cards__card">
+        <article class="cards__card">
           <img class="cards__image" src="./images/photo-grid-atharva-karachaevsk.jpg" alt="Карачаевск">
           <div class="cards__widget">
             <h2 class="cards__title">Карачаевск</h2>
-            <div class="cards__like"></div>
+            <button class="cards__like" type="button"></button>
           </div>
-        </div>
-        <div class="cards__card">
+        </article>
+        <article class="cards__card">
           <img class="cards__image" src="./images/photo-grid-atharva-elbrus.jpg" alt="Эльбрус">
           <div class="cards__widget">
             <h2 class="cards__title">Гора Эльбрус</h2>
-            <div class="cards__like"></div>
+            <button class="cards__like" type="button"></button>
           </div>
-        </div>
-        <div class="cards__card">
+        </article>
+        <article class="cards__card">
           <img class="cards__image" src="./images/photo-grid-atharva-dombai.jpg" alt="Домбай">
           <div class="cards__widget">
             <h2 class="cards__title">Домбай</h2>
-            <div class="cards__like"></div>
+            <button class="cards__like" type="button"></button>
           </div>
-        </div>
-        <div class="cards__card">
+        </article>
+        <article class="cards__card">
           <img class="cards__image" src="./images/photo-grid-atharva-karachaevsk.jpg" alt="Карачаевск">
           <div class="cards__widget">
             <h2 class="cards__title">Карачаево-Черкесия</h2>
-            <div class="cards__like"></div>
+            <button class="cards__like" type="button"></button>
           </div>
-        </div>
-        <div class="cards__card">
+        </article>
+        <article class="cards__card">
           <img class="cards__image" src="./images/photo-grid-atharva-elbrus.jpg" alt="Эльбрус">
           <div class="cards__widget">
             <h2 class="cards__title">Гора Эльбрус</h2>
-            <div class="cards__like"></div>
+            <button class="cards__like" type="button"></button>
           </div>
-        </div>
-        <div class="cards__card">
+        </article>
+        <article class="cards__card">
           <img class="cards__image" src="./images/photo-grid-atharva-dombai.jpg" alt="Домбай">
           <div class="cards__widget">
             <h2 class="cards__title">Домбай</h2>
-            <div class="cards__like"></div>
+            <button class="cards__like" type="button"></button>
           </div>
-        </div>
+        </article>
       </section>
 
     </main>
 
+    <footer class="footer">
+      <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
+    </footer>
+
     <section class="popup">
       <div class="popup__container">
-        <button class="popup__close-button"></button>
+        <button class="popup__close-button" type="button"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
-        <form class="popup__form">
-          <input class="popup__input popup__input_edit_name" type="text" placeholder="Имя" required>
-          <input class="popup__input popup__input_edit_description" type="text" placeholder="О себе" required>
+        <form class="popup__form" name="profileForm">
+          <input class="popup__input popup__input_edit_name" type="text" name="nameEdit" placeholder="Имя" required>
+          <input class="popup__input popup__input_edit_description" type="text" name="descriptionEdit" placeholder="О себе" required>
           <button class="popup__save-button" type="submit">Сохранить</button>
         </form>
       </div>
     </section>
 
-    <footer class="footer">
-      <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
-    </footer>
   </div>
-  <script src="./index.js"></script>
+  <script src="./scripts/index.js"></script>
 </body>
 </html>

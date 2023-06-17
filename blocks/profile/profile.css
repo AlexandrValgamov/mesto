@@ -7,7 +7,7 @@
   "avatar title edit-button add-button"
   "avatar subtitle subtitle add-button";
   margin: 0 auto;
-  padding-bottom: 50px;
+  padding: 40px 0 50px;
 }
 
 @media screen and (max-width: 880px) {
@@ -18,8 +18,9 @@
 
 @media screen and (max-width: 740px) {
   .profile {
+    padding-top: 42px;
     grid-template-columns: 235px 47px;
-    grid-template-rows: 120px 56px 26px 82px;
+    grid-template-rows: 120px 58px 26px 82px;
     grid-template-areas:
     "avatar avatar"
     "title edit-button"
