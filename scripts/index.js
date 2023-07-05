@@ -27,7 +27,9 @@ const initialCards = [
 
 const editButtonElement = document.querySelector('.profile__edit-button');
 const addButtonElement = document.querySelector('.profile__add-button');
-const popupElement = document.querySelector('.popup');
+const popupElement = document.querySelector('.popup_type_text');
+const popupImageBlockElement = document.querySelector('.popup_type_image');
+const popupAllElements = document.querySelectorAll('.popup');
 const formElement = document.querySelector('.popup__form');
 const closeButtonElement = document.querySelector('.popup__close-button');
 
@@ -64,11 +66,19 @@ function addClick() {
   formElement.addEventListener('submit', addCard);
 }
 
+function imageClick(e) {
+  popupImageBlockElement.classList.add('popup_opened');
+
+  popupImageBlockElement.querySelector('.popup__image').src = e.target.src;
+  popupImageBlockElement.querySelector('.popup__caption').textContent = e.target.alt;
+}
+
 function closeClick() {
   popupElement.classList.remove('popup_opened');
+  popupImageBlockElement.classList.remove('popup_opened');
   if (popupTitleElement.textContent === 'Новое место') {
     formElement.removeEventListener('submit', addCard);
-  } else {
+  } else if (popupTitleElement.textContent === 'Редактировать профиль'){
     formElement.removeEventListener('submit', saveClick);
   }
 }
@@ -86,10 +96,13 @@ function createCard({name, link}){
 
   cardElement.querySelector('.cards__title').textContent = name;
   cardElement.querySelector('.cards__image').src = link;
+  cardElement.querySelector('.cards__image').alt = name;
+
+  cardElement.querySelector('.cards__image').addEventListener('click', imageClick);
 
   trashElement.addEventListener('click', function() {
     trashElement.closest('.cards__card').remove();
-    })
+    });
 
   gallaryElement.prepend(cardElement);
 }
@@ -107,4 +120,11 @@ initialCards.forEach((item) => {
 
 editButtonElement.addEventListener('click', editClick);
 addButtonElement.addEventListener('click', addClick);
-closeButtonElement.addEventListener('click', closeClick);
+
+popupAllElements.forEach((item) => {
+  item.addEventListener('click', function(e) {
+    if (e.target.classList.contains('popup__close-button')) closeClick();
+  })
+});
+
+//closeButtonElement.addEventListener('click', closeClick);
