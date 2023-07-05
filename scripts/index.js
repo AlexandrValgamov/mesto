@@ -49,7 +49,10 @@ function editClick() {
 
   popupTitleElement.textContent = 'Редактировать профиль';
   inputNameElement.value = titleElement.textContent;
+  inputNameElement.placeholder = 'Имя'
   inputDescriptionElement.value = subtitleElement.textContent;
+  inputDescriptionElement.type = 'text';
+  inputDescriptionElement.placeholder = 'О себе';
   popupSaveButtonElement.textContent = 'Сохранить';
 
   formElement.addEventListener('submit', saveClick);
@@ -59,23 +62,28 @@ function addClick() {
   popupElement.classList.add('popup_opened');
 
   popupTitleElement.textContent = 'Новое место';
-  inputNameElement.value = 'Название';
-  inputDescriptionElement.value = 'Ссылка на картинку';
+  inputNameElement.value = '';
+  inputNameElement.placeholder = 'Название'
+  inputDescriptionElement.value = '';
+  inputDescriptionElement.type = 'url';
+  inputDescriptionElement.placeholder = 'Ссылка на картинку';
   popupSaveButtonElement.textContent = 'Создать';
 
   formElement.addEventListener('submit', addCard);
 }
 
-function imageClick(e) {
+function openImageClick(e) {
   popupImageBlockElement.classList.add('popup_opened');
 
   popupImageBlockElement.querySelector('.popup__image').src = e.target.src;
+  popupImageBlockElement.querySelector('.popup__image').alt = e.target.alt;
   popupImageBlockElement.querySelector('.popup__caption').textContent = e.target.alt;
 }
 
 function closeClick() {
   popupElement.classList.remove('popup_opened');
   popupImageBlockElement.classList.remove('popup_opened');
+
   if (popupTitleElement.textContent === 'Новое место') {
     formElement.removeEventListener('submit', addCard);
   } else if (popupTitleElement.textContent === 'Редактировать профиль'){
@@ -93,16 +101,20 @@ function saveClick(evt) {
 function createCard({name, link}){
   const cardElement = templateElement.content.cloneNode(true);
   const trashElement = cardElement.querySelector('.cards__trash-button');
+  const likeElement = cardElement.querySelector('.cards__like');
 
   cardElement.querySelector('.cards__title').textContent = name;
   cardElement.querySelector('.cards__image').src = link;
   cardElement.querySelector('.cards__image').alt = name;
 
-  cardElement.querySelector('.cards__image').addEventListener('click', imageClick);
+  cardElement.querySelector('.cards__image').addEventListener('click', openImageClick);
+  likeElement.addEventListener('click', () => {
+    likeElement.classList.toggle('cards__like_active');
+  });
 
   trashElement.addEventListener('click', function() {
     trashElement.closest('.cards__card').remove();
-    });
+  });
 
   gallaryElement.prepend(cardElement);
 }
@@ -126,5 +138,3 @@ popupAllElements.forEach((item) => {
     if (e.target.classList.contains('popup__close-button')) closeClick();
   })
 });
-
-//closeButtonElement.addEventListener('click', closeClick);
