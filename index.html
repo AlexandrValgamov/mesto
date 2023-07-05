@@ -35,7 +35,7 @@
     <section class="popup popup_type_text">
       <div class="popup__container">
         <button class="popup__close-button" type="button"></button>
-        <h2 class="popup__title"></h2>
+        <h2 class="popup__title">#</h2>
         <form class="popup__form" name="profileForm">
           <input class="popup__input popup__input_edit_name" type="text" name="nameEdit" placeholder="Имя" required>
           <input class="popup__input popup__input_edit_description" type="text" name="descriptionEdit" placeholder="О себе" required>
@@ -45,11 +45,13 @@
     </section>
 
     <section class="popup popup_type_image" aria-label="Фото">
-      <figure class="popup__photo-block">
-        <img class="popup__image" src="" alt="">
-        <figcaption class="popup__caption"></figcaption>
+      <div class="popup__photo-container">
         <button class="popup__close-button" type="button"></button>
-      </figure>
+        <figure class="popup__photo-block">
+          <img class="popup__image" src="#" alt="#">
+          <figcaption class="popup__caption"></figcaption>
+        </figure>
+      </div>
     </section>
 
   </div>
