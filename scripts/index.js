@@ -60,7 +60,7 @@ function closePopup(popup) {
 }
 
 function openImageClick(e) {
-  popupImageBlockElement.classList.add('popup_opened');
+  openPopup(popupImageBlockElement);
   popupImageElement.src = e.target.src;
   popupImageElement.alt = e.target.alt;
   popupCaptionElement.textContent = e.target.alt;
