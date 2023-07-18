@@ -36,9 +36,33 @@
       <div class="popup__container">
         <button class="popup__close-button" type="button"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
-        <form class="popup__form" name="profileForm">
-          <input class="popup__input popup__input_edit_name" type="text" name="nameEdit" placeholder="Имя" required>
-          <input class="popup__input popup__input_edit_description" type="text" name="descriptionEdit" placeholder="О себе" required>
+        <form class="popup__form" name="profileForm" novalidate>
+          <fieldset class="popup__form-set">
+            <label class="popup__form-field">
+              <input
+                class="popup__input popup__input_edit_name"
+                type="text"
+                id="input-name"
+                name="input-name"
+                placeholder="Имя"
+                minlength="2"
+                maxlength="40"
+                required>
+              <span class="popup__input-error input-name-error"></span>
+            </label>
+            <label class="popup__form-field">
+              <input
+                class="popup__input popup__input_edit_description"
+                type="text"
+                id="input-description"
+                name="input-description"
+                placeholder="О себе"
+                minlength="2"
+                maxlength="200"
+                required>
+              <span class="popup__input-error input-description-error"></span>
+            </label>
+          </fieldset>
           <button class="popup__save-button" type="submit">Сохранить</button>
         </form>
       </div>
@@ -48,9 +72,31 @@
       <div class="popup__container">
         <button class="popup__close-button" type="button"></button>
         <h2 class="popup__title">Новое место</h2>
-        <form class="popup__form" name="profileForm">
-          <input class="popup__input popup__input_edit_name" type="text" name="nameEdit" placeholder="Название" required>
-          <input class="popup__input popup__input_edit_description" type="url" name="linkEdit" placeholder="Ссылка на картинку" required>
+        <form class="popup__form" name="profileForm" novalidate>
+          <fieldset class="popup__form-set">
+            <label class="popup__form-field">
+              <input
+                class="popup__input popup__input_edit_name"
+                type="text"
+                id="input-place"
+                name="input-place"
+                placeholder="Название"
+                minlength="2"
+                maxlength="30"
+                required>
+              <span class="popup__input-error input-place-error"></span>
+            </label>
+            <label class="popup__form-field">
+              <input
+                class="popup__input popup__input_edit_description"
+                type="url"
+                id="input-link"
+                name="input-link"
+                placeholder="Ссылка на картинку"
+                required>
+              <span class="popup__input-error input-link-error"></span>
+            </label>
+          </fieldset>
           <button class="popup__save-button" type="submit">Создать</button>
         </form>
       </div>
@@ -80,6 +126,7 @@
   </template>
 
   <script src="./scripts/index.js"></script>
+  <script src="./scripts/validate.js"></script>
 
 </body>
 </html>
