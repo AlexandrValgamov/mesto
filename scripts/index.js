@@ -1,64 +1,31 @@
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-
-const editButtonElement = document.querySelector('.profile__edit-button');
-const addButtonElement = document.querySelector('.profile__add-button');
-
+const popupProfileOpenButton = document.querySelector('.profile__edit-button');
+const popupProfileAddButton = document.querySelector('.profile__add-button');
 const titleElement = document.querySelector('.profile__title');
 const subtitleElement = document.querySelector('.profile__subtitle');
 
 const popupEditElement = document.querySelector('.popup_type_edit');
-const editFormElement = popupEditElement.querySelector('.popup__form');
+const formEditElement = popupEditElement.querySelector('.popup__form');
 const inputNameElement = popupEditElement.querySelector('.popup__input_edit_name');
 const inputDescriptionElement = popupEditElement.querySelector('.popup__input_edit_description');
-const submitEditElement = popupEditElement.querySelector('.popup__save-button');
+const popupEditButton = popupEditElement.querySelector('.popup__save-button');
 const inputEditList = Array.from(popupEditElement.querySelectorAll('.popup__input'));
 
 const popupAddElement = document.querySelector('.popup_type_add');
-const addFormElement = popupAddElement.querySelector('.popup__form');
+const formAddElement = popupAddElement.querySelector('.popup__form');
 const inputNameImageElement = popupAddElement.querySelector('.popup__input_edit_name');
 const inputDescriptionImageElement = popupAddElement.querySelector('.popup__input_edit_description');
-const submitAddElement = popupAddElement.querySelector('.popup__save-button');
+const popupAddButton = popupAddElement.querySelector('.popup__save-button');
 const inputAddList = Array.from(popupAddElement.querySelectorAll('.popup__input'));
 
 const popupImageBlockElement = document.querySelector('.popup_type_zoom');
 const popupImageElement = popupImageBlockElement.querySelector('.popup__image');
 const popupCaptionElement = popupImageBlockElement.querySelector('.popup__caption');
 
+const popupElements = document.querySelectorAll('.popup');
 const closeButtons = document.querySelectorAll('.popup__close-button');
 
 const gallaryElement = document.querySelector('.cards');
 const templateElement = document.querySelector('.card-template');
-
-const pressEsc = (popup) => (evt) =>{
-  if (evt.key === 'Escape') {
-    closePopup(popup);
-  }
-}
 
 function resetError(popup){
   const inputElements = popup.querySelectorAll('.popup__input');
@@ -69,13 +36,21 @@ function resetError(popup){
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
-  document.addEventListener('keydown', pressEsc(popup));
+  document.addEventListener('keydown', closePopupByEsc);
 }
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
-  resetError(popup);
-  document.removeEventListener('keydown', pressEsc);
+  document.removeEventListener('keydown', closePopupByEsc);
+}
+
+const closePopupByEsc = (evt) =>{
+  if (evt.key === 'Escape') {
+    const popup = Array.from(popupElements).find((elem) => {
+      return elem.classList.contains('popup_opened');
+    })
+    closePopup(popup);
+  }
 }
 
 function openImageClick(evt) {
@@ -89,12 +64,13 @@ function createCard({name, link}){
   const cardElement = templateElement.content.cloneNode(true);
   const likeElement = cardElement.querySelector('.cards__like');
   const trashElement = cardElement.querySelector('.cards__trash-button');
+  const imageElement = cardElement.querySelector('.cards__image');
 
   cardElement.querySelector('.cards__title').textContent = name;
-  cardElement.querySelector('.cards__image').src = link;
-  cardElement.querySelector('.cards__image').alt = name;
+  imageElement.src = link;
+  imageElement.alt = name;
 
-  cardElement.querySelector('.cards__image').addEventListener('click', openImageClick);
+  imageElement.addEventListener('click', openImageClick);
   likeElement.addEventListener('click', () => likeElement.classList.toggle('cards__like_active'));
   trashElement.addEventListener('click', () => trashElement.closest('.cards__card').remove());
 
@@ -105,32 +81,34 @@ function addCard(newElement) {
   gallaryElement.prepend(newElement);
 }
 
-function editClick() {
+function openPopupProfile() {
   inputNameElement.value = titleElement.textContent;
   inputDescriptionElement.value = subtitleElement.textContent;
 
-  toggleButttonState(inputEditList, submitEditElement, VALIDATION_CONFIG);
+  toggleButttonState(inputEditList, popupEditButton, VALIDATION_CONFIG);
+  resetError(popupEditElement);
   openPopup(popupEditElement);
 }
 
-function saveClick(evt) {
+function savePopupProfile(evt) {
   evt.preventDefault();
   titleElement.textContent = inputNameElement.value;
   subtitleElement.textContent = inputDescriptionElement.value;
   closePopup(popupEditElement);
 }
 
-function addClick() {
-  addFormElement.reset();
-  toggleButttonState(inputAddList, submitAddElement, VALIDATION_CONFIG);
+function openPopupAddCard() {
+  formAddElement.reset();
+  toggleButttonState(inputAddList, popupAddButton, VALIDATION_CONFIG);
+  resetError(popupAddElement);
   openPopup(popupAddElement);
 }
 
-function createClick(evt) {
+function createNewCard(evt) {
   evt.preventDefault();
   addCard(createCard({name: inputNameImageElement.value, link: inputDescriptionImageElement.value}));
   closePopup(popupAddElement);
-  addFormElement.reset();
+  formAddElement.reset();
 }
 
 initialCards.forEach((item) => {
@@ -148,12 +126,12 @@ function clickOverlay(evt) {
   }
 }
 
-editButtonElement.addEventListener('click', editClick);
-editFormElement.addEventListener('submit', saveClick);
+popupProfileOpenButton.addEventListener('click', openPopupProfile);
+formEditElement.addEventListener('submit', savePopupProfile);
 
-addButtonElement.addEventListener('click', addClick);
-addFormElement.addEventListener('submit', createClick);
+popupProfileAddButton.addEventListener('click', openPopupAddCard);
+formAddElement.addEventListener('submit', createNewCard);
 
-popupEditElement .addEventListener("click", clickOverlay);
-popupAddElement.addEventListener("click", clickOverlay);
-popupImageBlockElement.addEventListener("click", clickOverlay);
+popupEditElement .addEventListener("mousedown", clickOverlay);
+popupAddElement.addEventListener("mousedown", clickOverlay);
+popupImageBlockElement.addEventListener("mousedown", clickOverlay);
