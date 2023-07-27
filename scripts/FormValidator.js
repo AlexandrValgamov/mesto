@@ -31,7 +31,7 @@ export class FormValidator {
     }
   }
 
-  _hasInvalidInput(inputList) {
+  _hasInvalidInput() {
     return this._inputList.some((inputElement) => {
       return !inputElement.validity.valid;
     })
@@ -42,7 +42,7 @@ export class FormValidator {
     this._buttonElement.disabled = true;
   }
 
-  _enableButton(button, config) {
+  _enableButton() {
     this._buttonElement.classList.remove(this._config.inactiveButtonClass);
     this._buttonElement.disabled = false;
   }
