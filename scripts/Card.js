@@ -41,7 +41,8 @@ export class Card {
   }
 
   _handleTrashClick() {
-    this._trashElement.closest('.cards__card').remove();
+    this._element.remove();
+    this._element = null;
   }
 
   _setEventListeners() {

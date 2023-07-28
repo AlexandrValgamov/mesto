@@ -43,11 +43,13 @@ function closePopup(popup) {
   document.removeEventListener('keydown', closePopupByEsc);
 }
 
-const closePopupByEsc = (evt) =>{
+const closePopupByEsc = (evt) => {
   if (evt.key === 'Escape') {
+
     const popup = Array.from(popupElements).find((elem) => {
       return elem.classList.contains('popup_opened');
     })
+
     closePopup(popup);
   }
 }
