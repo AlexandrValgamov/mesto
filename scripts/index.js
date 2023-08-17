@@ -1,5 +1,9 @@
-import { Card } from './Card.js';
+import Card from './Card.js';
 import { FormValidator } from './FormValidator.js';
+import Section from './Section.js'
+import PopupWithForm from './PopupWithForm.js';
+import PopupWithImage from './PopupWithImage.js';
+import { initialCards, VALIDATION_CONFIG } from './data.js';
 
 const popupProfileOpenButton = document.querySelector('.profile__edit-button');
 const popupProfileAddButton = document.querySelector('.profile__add-button');
@@ -33,37 +37,50 @@ function resetError(popup, classElement){
   });
 }
 
-function openPopup(popup) {
-  popup.classList.add('popup_opened');
-  document.addEventListener('keydown', closePopupByEsc);
+// // Popup
+// function openPopup(popup) {
+//   popup.classList.add('popup_opened');
+//   document.addEventListener('keydown', closePopupByEsc);
+// }
+
+// Popup
+// function closePopup(popup) {
+//   popup.classList.remove('popup_opened');
+//   document.removeEventListener('keydown', closePopupByEsc);
+// }
+
+// Popup
+// const closePopupByEsc = (evt) => {
+//   if (evt.key === 'Escape') {
+
+//     const popup = Array.from(popupElements).find((elem) => {
+//       return elem.classList.contains('popup_opened');
+//     })
+
+//     closePopup(popup);
+//   }
+// }
+
+// PopupWithImage
+// function openImageClick(name, link) {
+//   openPopup(popupImageBlockElement);
+//   popupImageElement.src = link;
+//   popupImageElement.alt = name;
+//   popupCaptionElement.textContent = name;
+// }
+
+const popupWithImage = new PopupWithImage('.popup_type_zoom');
+
+function handleCardClick(name, link) {
+  popupWithImage.open(name, link);
 }
 
-function closePopup(popup) {
-  popup.classList.remove('popup_opened');
-  document.removeEventListener('keydown', closePopupByEsc);
-}
+popupWithImage.setEventListeners();
 
-const closePopupByEsc = (evt) => {
-  if (evt.key === 'Escape') {
-
-    const popup = Array.from(popupElements).find((elem) => {
-      return elem.classList.contains('popup_opened');
-    })
-
-    closePopup(popup);
-  }
-}
-
-function openImageClick(name, link) {
-  openPopup(popupImageBlockElement);
-  popupImageElement.src = link;
-  popupImageElement.alt = name;
-  popupCaptionElement.textContent = name;
-}
-
-function addCard(newElement) {
-  gallaryElement.prepend(newElement);
-}
+// // Section
+// function addCard(newElement) {
+//   gallaryElement.prepend(newElement);
+// }
 
 function openPopupProfile() {
   inputNameElement.value = titleElement.textContent;
@@ -97,21 +114,37 @@ function createNewCard(evt) {
   formAddElement.reset();
 }
 
-initialCards.forEach((item) => {
-  const card = new Card(item, '.card-template', openImageClick);
-  addCard(card.createCard());
-});
+// Section(func)
+// initialCards.forEach((item) => {
+//   const card = new Card(item, '.card-template', openImageClick);
+//   addCard(card.createCard());
+// });
 
-closeButtons.forEach((button) => {
-  const popup = button.closest('.popup');
-  button.addEventListener('click', () => closePopup(popup));
-});
+const cardsList = new Section ({
+    items: initialCards,
+    renderer: (item) => {
+      const card = new Card(item, '.card-template', handleCardClick);
 
-function clickOverlay(evt) {
-  if (evt.currentTarget === evt.target) {
-    closePopup(evt.target);
-  }
-}
+      cardsList.addItem(card.createCard());
+    },
+  },
+  '.cards'
+);
+
+cardsList.renderItems();
+
+// Popup
+// closeButtons.forEach((button) => {
+//   const popup = button.closest('.popup');
+//   button.addEventListener('click', () => closePopup(popup));
+// });
+
+// Popup
+// function clickOverlay(evt) {
+//   if (evt.currentTarget === evt.target) {
+//     closePopup(evt.target);
+//   }
+// }
 //Создаем экземпляры класса FormValidator
 const formProfileValidation = new FormValidator(VALIDATION_CONFIG, formEditElement);
 formProfileValidation.enableValidation();
@@ -125,6 +158,6 @@ formEditElement.addEventListener('submit', savePopupProfile);
 popupProfileAddButton.addEventListener('click', openPopupAddCard);
 formAddElement.addEventListener('submit', createNewCard);
 
-popupEditElement .addEventListener("mousedown", clickOverlay);
-popupAddElement.addEventListener("mousedown", clickOverlay);
-popupImageBlockElement.addEventListener("mousedown", clickOverlay);
+// popupEditElement.addEventListener("mousedown", clickOverlay);
+// popupAddElement.addEventListener("mousedown", clickOverlay);
+// popupImageBlockElement.addEventListener("mousedown", clickOverlay);

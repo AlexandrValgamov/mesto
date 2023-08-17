@@ -1,9 +1,9 @@
-export class Card {
-  constructor(data, templateSelector, openImageClick){
+export default class Card {
+  constructor(data, templateSelector, handleCardClick){
     this._name = data.name;
     this._link = data.link;
     this._templateSelector = templateSelector;
-    this._openImageClick = openImageClick;
+    this._handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
@@ -33,7 +33,7 @@ export class Card {
   }
 
   _handleImageClick() {
-    this._openImageClick(this._name, this._link);
+    this._handleCardClick(this._name, this._link);
   }
 
   _handleLikeClick() {
