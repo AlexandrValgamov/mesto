@@ -1,28 +1,36 @@
-import Card from './Card.js';
-import FormValidator from './FormValidator.js';
-import Section from './Section.js'
-import PopupWithForm from './PopupWithForm.js';
-import PopupWithImage from './PopupWithImage.js';
-import { initialCards, VALIDATION_CONFIG } from './data.js';
-import UserInfo from './UserInfo.js';
-
-const popupProfileOpenButton = document.querySelector('.profile__edit-button');
-const popupProfileAddButton = document.querySelector('.profile__add-button');
-const popupEditElement = document.querySelector('.popup_type_edit');
-const formEditElement = popupEditElement.querySelector('.popup__form');
-const inputNameElement = popupEditElement.querySelector('.popup__input_edit_name');
-const inputDescriptionElement = popupEditElement.querySelector('.popup__input_edit_description');
-const popupAddElement = document.querySelector('.popup_type_add');
-const formAddElement = popupAddElement.querySelector('.popup__form');
-
-function resetError(popup, classElement){
-  const inputElements = popup.querySelectorAll('.popup__input');
-  inputElements.forEach((inputElement) => {
-    classElement.hideInputError(inputElement);
-  });
-}
+import './index.css';
+import Card from '../scripts/components/Card.js';
+import FormValidator from '../scripts/components/FormValidator.js';
+import Section from '../scripts/components/Section.js'
+import PopupWithForm from '../scripts/components/PopupWithForm.js';
+import PopupWithImage from '../scripts/components/PopupWithImage.js';
+import UserInfo from '../scripts/components/UserInfo.js';
+import {
+  initialCards,
+  VALIDATION_CONFIG,
+  popupProfileOpenButton,
+  popupProfileAddButton,
+  popupEditElement,
+  formEditElement,
+  inputNameElement,
+  inputDescriptionElement,
+  popupAddElement,
+  formAddElement
+} from '../scripts/utils/constants.js';
 
 const userInfo = new UserInfo('.profile__title', '.profile__subtitle');
+
+const cardsList = new Section({
+    items: initialCards,
+    renderer: (item) => {
+      const card = new Card(item, '.card-template', handleCardClick);
+      cardsList.addItem(card.createCard());
+    },
+  },
+  '.cards'
+);
+
+cardsList.renderItems();
 
 const popupWithImage = new PopupWithImage('.popup_type_zoom');
 
@@ -31,19 +39,6 @@ popupWithImage.setEventListeners();
 function handleCardClick(name, link) {
   popupWithImage.open(name, link);
 }
-
-const cardsList = new Section({
-    items: initialCards,
-    renderer: (item) => {
-      const card = new Card(item, '.card-template', handleCardClick);
-
-      cardsList.addItem(card.createCard());
-    },
-  },
-  '.cards'
-);
-
-cardsList.renderItems();
 
 const popupProfile = new PopupWithForm({
   popupSelector: '.popup_type_edit',
@@ -59,7 +54,7 @@ popupProfileOpenButton.addEventListener('click', () => {
   inputNameElement.value = userInfo.getUserInfo().name;
   inputDescriptionElement.value = userInfo.getUserInfo().info;
   formProfileValidation.toggleButttonState();
-  resetError(popupEditElement, formProfileValidation);
+  formProfileValidation.resetError();
   popupProfile.open();
 });
 
@@ -77,7 +72,7 @@ PopupAddCard.setEventListeners();
 popupProfileAddButton.addEventListener('click', () => {
   formAddElement.reset();
   formImageValidation.toggleButttonState();
-  resetError(popupAddElement, formImageValidation);
+  formImageValidation.resetError();
   PopupAddCard.open();
 });
 

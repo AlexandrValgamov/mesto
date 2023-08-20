@@ -33,3 +33,12 @@ export const VALIDATION_CONFIG = {
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__input-error_active'
 };
+
+export const popupProfileOpenButton = document.querySelector('.profile__edit-button');
+export const popupProfileAddButton = document.querySelector('.profile__add-button');
+export const popupEditElement = document.querySelector('.popup_type_edit');
+export const formEditElement = popupEditElement.querySelector('.popup__form');
+export const inputNameElement = popupEditElement.querySelector('.popup__input_edit_name');
+export const inputDescriptionElement = popupEditElement.querySelector('.popup__input_edit_description');
+export const popupAddElement = document.querySelector('.popup_type_add');
+export const formAddElement = popupAddElement.querySelector('.popup__form');
