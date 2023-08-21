@@ -42,6 +42,11 @@ export default class Card {
 
   _handleTrashClick() {
     this._element.remove();
+
+    this._likeElement = null;
+    this._trashElement = null;
+    this._imageElement = null;
+
     this._element = null;
   }
 
