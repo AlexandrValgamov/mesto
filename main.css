@@ -15,8 +15,10 @@
 .cards__image{cursor:pointer;height:282px;-o-object-fit:cover;object-fit:cover;width:282px}
 .cards__widget{align-items:center;display:flex;flex-direction:row;justify-content:space-between;min-height:79px}
 .cards__title{color:#000;font-family:Inter,Helvetica Neue,Arial,sans-serif;font-size:24px;font-style:normal;font-weight:900;line-height:29px;margin:0;max-width:198px;overflow:hidden;padding-left:21px;text-overflow:ellipsis;white-space:nowrap}
-.cards__like{background-color:transparent;background-image:url(images/like-disabled.f9cbbc232f4ed178be38.svg);border:none;cursor:pointer;height:19px;margin-right:20px;padding:0;transition:background-image .3s linear;width:22px}.cards__like:hover{opacity:.5}
-.cards__like_active{background-image:url(images/like-active.d750ae7834bd9bfe5181.svg)}
+
+.cards__like-button{background-color:transparent;background-image:url(images/like-disabled.f9cbbc232f4ed178be38.svg);border:none;cursor:pointer;height:19px;margin-right:20px;padding:0;transition:background-image .3s linear;width:22px}.cards__like:hover{opacity:.5}
+
+.cards__like-button_active{background-image:url(images/like-active.d750ae7834bd9bfe5181.svg)}
 .cards__trash-button{background-color:transparent;background-image:url(images/trash.161265c632b9f887063c.svg);background-repeat:no-repeat;background-size:contain;border:0;cursor:pointer;height:19px;position:absolute;right:20px;top:20px;width:18px}.cards__trash-button:hover{opacity:.6}
 .footer{margin:0 auto;max-width:880px;padding:67px 0 60px}@media screen and (max-width:880px){.footer{max-width:594px}}@media screen and (max-width:740px){.footer{padding:52px 19px 36px}}
 .footer__copyright{color:#545454;font-family:Inter,Helvetica Neue,Arial,sans-serif;font-size:18px;font-style:normal;font-weight:400;line-height:22px;margin:0}@media screen and (max-width:880px){.footer__copyright{font-size:14px;line-height:17px}}
