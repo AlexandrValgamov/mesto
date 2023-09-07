@@ -16,7 +16,8 @@ import {
   formEditElement,
   inputNameElement,
   inputDescriptionElement,
-  formAddElement
+  formAddElement,
+  formEditAvatar
 } from '../scripts/utils/constants.js';
 
 let myId;
@@ -55,6 +56,9 @@ const popupEditAvatar = new PopupWithForm({
 popupEditAvatar.setEventListeners();
 
 popupProfileAvatarButton.addEventListener('click', () => {
+  formEditAvatar.reset();
+  formAvatarValidation.toggleButttonState();
+  formAvatarValidation.resetErrors();
   popupEditAvatar.open();
 });
 
@@ -170,3 +174,6 @@ formProfileValidation.enableValidation();
 
 const formImageValidation = new FormValidator(VALIDATION_CONFIG, formAddElement);
 formImageValidation.enableValidation();
+
+const formAvatarValidation = new FormValidator(VALIDATION_CONFIG, formEditAvatar);
+formAvatarValidation.enableValidation();

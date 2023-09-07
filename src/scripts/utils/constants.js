@@ -24,3 +24,5 @@ export const inputNameElement = popupEditElement.querySelector('.popup__input_ed
 export const inputDescriptionElement = popupEditElement.querySelector('.popup__input_edit_description');
 export const popupAddElement = document.querySelector('.popup_type_add');
 export const formAddElement = popupAddElement.querySelector('.popup__form');
+export const popupEditAvatar = document.querySelector('.popup_type_edit-avatar');
+export const formEditAvatar = popupEditAvatar.querySelector('.popup__form');
