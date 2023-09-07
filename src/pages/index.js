@@ -39,6 +39,9 @@ Promise.all([api.getInitialCards(), api.getUserInfo()])
     userInfo.setUserInfo(user.name, user.about);
     userInfo.setAvatar(user.avatar);
   })
+  .catch((err) => {
+    console.log(err);
+  })
 
 const popupEditAvatar = new PopupWithForm({
   popupSelector: '.popup_type_edit-avatar',
@@ -47,8 +50,13 @@ const popupEditAvatar = new PopupWithForm({
       .then((res => {
         popupEditAvatar.close();
         userInfo.setAvatar(res.avatar);
-        popupEditAvatar.toggleDefaultButtonText();
       }))
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        popupEditAvatar.toggleDefaultButtonText();
+      })
   },
   textSubmitButton: 'Сохранение...'
 });
@@ -103,11 +111,12 @@ const popupProfile = new PopupWithForm({
       .then((res) => {
         userInfo.setUserInfo(res.name, res.about);
         popupProfile.close();
-        popupProfile.toggleDefaultButtonText();
       })
       .catch((err) => {
-        popupProfile.close();
         console.log(err);
+      })
+      .finally(() => {
+        popupProfile.toggleDefaultButtonText();
       })
   },
   textSubmitButton: 'Сохранение...'
@@ -130,12 +139,13 @@ const popupAddCard = new PopupWithForm({
     api.postCard(name, link)
       .then((res) => {
         popupAddCard.close();
-        popupAddCard.toggleDefaultButtonText();
         addCard(res);
       })
       .catch((err) => {
-        popupAddCard.close();
         console.log(err);
+      })
+      .finally(() => {
+        popupAddCard.toggleDefaultButtonText();
       })
   },
   textSubmitButton: 'Сохранение...'
@@ -155,14 +165,15 @@ const popupWithConfirmation = new PopupWithConfirmation({
   handleConfirmation: (card) => {
     api.deleteCard(card._id)
     .then(() => {
-        popupWithConfirmation.close();
-        popupWithConfirmation.toggleDefaultButtonText();
-        card._element.remove();
-      })
-      .catch((err) => {
-        popupWithConfirmation.close();
-        console.log(err);
-      })
+      popupWithConfirmation.close();
+      card.removeElement();
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => {
+      popupWithConfirmation.toggleDefaultButtonText();
+    })
   },
   textConfirmButton: 'Удаление...'
 });

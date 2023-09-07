@@ -65,6 +65,10 @@ export default class Card {
     this._likeElement.classList.toggle('cards__like-button_active');
   }
 
+  removeElement() {
+    this._element.remove();
+  }
+
   _setEventListeners() {
     this._imageElement.addEventListener('click', () => {
       this._handleImageClick();
