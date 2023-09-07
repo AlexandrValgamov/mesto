@@ -1,9 +1,8 @@
-.cards__like {
+.cards__like-button {
   background-image: url(../../../images/like-disabled.svg);
   background-color: transparent;
   width: 22px;
   height: 19px;
-  margin-right: 20px;
   cursor: pointer;
   border: none;
   padding: 0;
